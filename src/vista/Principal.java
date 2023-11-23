@@ -27,7 +27,6 @@ public class Principal extends javax.swing.JFrame {
         setLocationRelativeTo(null); //para centrar
         Listar();
     }
-    
     //Lista
     void Listar(){
         String sql = "select * from persona";
@@ -49,7 +48,6 @@ public class Principal extends javax.swing.JFrame {
         } catch (SQLException e) {
         }
     }
-    
     //boton agregar
     void Agregar(){
         String dni = txtDNI.getText();
@@ -79,7 +77,6 @@ public class Principal extends javax.swing.JFrame {
             i=i-1;
         }
     }
-    
     //limpiar los campos
     void Limpiar(){
         txtID.setText("");
@@ -87,7 +84,6 @@ public class Principal extends javax.swing.JFrame {
         txtNOMBRE.setText("");
         txtAPELLIDO.setText("");
     }
-    
     //boton modificar
     void Modificar(){
         String dni= txtDNI.getText();
@@ -111,7 +107,6 @@ public class Principal extends javax.swing.JFrame {
             }
         }   
     }
-    
     //boton eliminar
     void Eliminar() {
         int seleccion=tbDatos.getSelectedRow();
