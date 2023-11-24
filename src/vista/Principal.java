@@ -29,19 +29,19 @@ public class Principal extends javax.swing.JFrame {
     }
     //Lista
     void Listar(){
-        String sql = "select * from persona";
+        String sql = "select * from productos";
         try {
             cn=con.getConnection();
             st=cn.createStatement();
             rs=st.executeQuery(sql);
-            Object[] persona = new Object[4];
+            Object[] productos = new Object[4];
             modelo=(DefaultTableModel) tbDatos.getModel();
             while (rs.next()){
-                persona[0]=rs.getInt("ID");
-                persona[1]=rs.getString("DNI");
-                persona[2]=rs.getString("NOMBRE");
-                persona[3]=rs.getString("APELLIDO");
-                modelo.addRow(persona);
+                productos[0]=rs.getInt("ID");
+                productos[1]=rs.getString("Producto");
+                productos[2]=rs.getString("Precio");
+                productos[3]=rs.getString("Stock");
+                modelo.addRow(productos);
             }
             tbDatos.setModel(modelo);
             System.out.println(modelo);
@@ -50,18 +50,18 @@ public class Principal extends javax.swing.JFrame {
     }
     //boton agregar
     void Agregar(){
-        String dni = txtDNI.getText();
-        String nombre = txtNOMBRE.getText();
-        String apellido = txtAPELLIDO.getText();
-        if (dni.equals("") || nombre.equals("")){
-            JOptionPane.showMessageDialog(null, "Faltan Datos por completar.");
+        String producto = txtPRODUCTO.getText();
+        String precio = txtPRECIO.getText();
+        String stock = txtSTOCK.getText();
+        if (producto.equals("") || precio.equals("")){
+            JOptionPane.showMessageDialog(null, "Faltan datos por completar.");
         }else{
-            String sql="insert into persona (DNI, Nombre,Apellido) values ('"+dni+"', '"+nombre+"', '"+apellido+"')";
+            String sql="insert into productos (Producto, Precio, Stock) values ('"+producto+"', '"+precio+"', '"+stock+"')";
             try {
                 cn=con.getConnection();
                 st=cn.createStatement();
                 st.executeUpdate(sql);
-                JOptionPane.showMessageDialog(null, "Persona agregada correctamente.");
+                JOptionPane.showMessageDialog(null, "Producto agregado correctamente.");
                 Barrer();
                 Limpiar();
             } catch (Exception e){
@@ -80,26 +80,26 @@ public class Principal extends javax.swing.JFrame {
     //limpiar los campos
     void Limpiar(){
         txtID.setText("");
-        txtDNI.setText("");
-        txtNOMBRE.setText("");
-        txtAPELLIDO.setText("");
+        txtPRODUCTO.setText("");
+        txtPRECIO.setText("");
+        txtSTOCK.setText("");
     }
     //boton modificar
     void Modificar(){
-        String dni= txtDNI.getText();
-        String nombre= txtNOMBRE.getText();
-        String apellido= txtAPELLIDO.getText();
+        String producto= txtPRODUCTO.getText();
+        String precio= txtPRECIO.getText();
+        String stock= txtSTOCK.getText();
 
-        String sql="update persona set DNI='"+dni+"', Nombre='"+nombre+"', Apellido='"+apellido+"' where ID="+id;
+        String sql="update productos set Producto='"+producto+"', Precio='"+precio+"', Stock='"+stock+"' where ID="+id;
 
-        if(dni.equals("") || nombre.equals("") || apellido.equals("")){
-            JOptionPane.showMessageDialog(null, "FALTAN DATOS");
+        if(producto.equals("") || precio.equals("") || stock.equals("")){
+            JOptionPane.showMessageDialog(null, "Completar los datos que faltan.");
         }else{
             try {
                 cn=con.getConnection();
                 st=cn.createStatement();
                 st.executeUpdate(sql);
-                       JOptionPane.showMessageDialog(null, "ACTUALIZADO CORRECTAMENTE");
+                       JOptionPane.showMessageDialog(null, "El producto se actualizo correctamente.");
                 Barrer(); 
                 Limpiar();
                 Listar();
@@ -111,14 +111,14 @@ public class Principal extends javax.swing.JFrame {
     void Eliminar() {
         int seleccion=tbDatos.getSelectedRow();
         if(seleccion==-1){
-            JOptionPane.showMessageDialog(null, "SELECCIONE A UNA PERSONA");
+            JOptionPane.showMessageDialog(null, "Seleccione un producto.");
         }else{
-            String sql="delete from persona where ID="+id;
+            String sql="delete from productos where ID="+id;
             try {
                 cn=con.getConnection();
                 st=cn.createStatement();
                 st.executeUpdate(sql);
-                JOptionPane.showMessageDialog(null, "ELIMINADO CORRECTAMENTE");
+                JOptionPane.showMessageDialog(null, "El producto se elimino correctamente.");
                 Barrer();
                 Limpiar();
                 Listar();
@@ -143,13 +143,13 @@ public class Principal extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         datosPN = new javax.swing.JPanel();
         IDlabel = new javax.swing.JLabel();
-        DNIlabel = new javax.swing.JLabel();
-        NOMBRElabel = new javax.swing.JLabel();
-        Apellidolabel = new javax.swing.JLabel();
+        ProductoLabel = new javax.swing.JLabel();
+        PrecioLabel = new javax.swing.JLabel();
+        StockLabel = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
-        txtDNI = new javax.swing.JTextField();
-        txtNOMBRE = new javax.swing.JTextField();
-        txtAPELLIDO = new javax.swing.JTextField();
+        txtPRODUCTO = new javax.swing.JTextField();
+        txtPRECIO = new javax.swing.JTextField();
+        txtSTOCK = new javax.swing.JTextField();
         listaPN = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbDatos = new javax.swing.JTable();
@@ -191,11 +191,11 @@ public class Principal extends javax.swing.JFrame {
             botonesPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, botonesPNLayout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
                 .addGap(37, 37, 37))
         );
         botonesPNLayout.setVerticalGroup(
@@ -214,24 +214,24 @@ public class Principal extends javax.swing.JFrame {
         IDlabel.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         IDlabel.setText("ID");
 
-        DNIlabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        DNIlabel.setText("DNI");
+        ProductoLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        ProductoLabel.setText("Producto");
 
-        NOMBRElabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        NOMBRElabel.setText("NOMBRE");
+        PrecioLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        PrecioLabel.setText("Precio");
 
-        Apellidolabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        Apellidolabel.setText("APELLIDO");
+        StockLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        StockLabel.setText("Stock");
 
         txtID.setEditable(false);
         txtID.setBackground(new java.awt.Color(204, 204, 204));
         txtID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        txtDNI.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtPRODUCTO.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        txtNOMBRE.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtPRECIO.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        txtAPELLIDO.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtSTOCK.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout datosPNLayout = new javax.swing.GroupLayout(datosPN);
         datosPN.setLayout(datosPNLayout);
@@ -242,9 +242,9 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(datosPNLayout.createSequentialGroup()
                         .addGap(64, 64, 64)
                         .addGroup(datosPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(DNIlabel)
+                            .addComponent(ProductoLabel)
                             .addGroup(datosPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(Apellidolabel)
+                                .addComponent(StockLabel)
                                 .addGroup(datosPNLayout.createSequentialGroup()
                                     .addComponent(IDlabel)
                                     .addGap(18, 18, 18)
@@ -252,14 +252,14 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(7, 7, 7))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, datosPNLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(NOMBRElabel)))
+                        .addComponent(PrecioLabel)))
                 .addGroup(datosPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(datosPNLayout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addGroup(datosPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtAPELLIDO, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(txtNOMBRE, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtSTOCK, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPRODUCTO, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtPRECIO, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         datosPNLayout.setVerticalGroup(
@@ -271,16 +271,16 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
                 .addGroup(datosPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DNIlabel)
-                    .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ProductoLabel)
+                    .addComponent(txtPRODUCTO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(datosPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNOMBRE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NOMBRElabel))
+                    .addComponent(txtPRECIO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PrecioLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(datosPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAPELLIDO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Apellidolabel))
+                    .addComponent(txtSTOCK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(StockLabel))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
 
@@ -291,7 +291,7 @@ public class Principal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "DNI", "NOMBRE", "APELLIDO"
+                "ID", "PRODUCTO", "PRECIO", "STOCK"
             }
         ));
         tbDatos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -300,15 +300,18 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tbDatos);
+        if (tbDatos.getColumnModel().getColumnCount() > 0) {
+            tbDatos.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tbDatos.getColumnModel().getColumn(1).setPreferredWidth(400);
+            tbDatos.getColumnModel().getColumn(2).setPreferredWidth(100);
+            tbDatos.getColumnModel().getColumn(3).setPreferredWidth(100);
+        }
 
         javax.swing.GroupLayout listaPNLayout = new javax.swing.GroupLayout(listaPN);
         listaPN.setLayout(listaPNLayout);
         listaPNLayout.setHorizontalGroup(
             listaPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, listaPNLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
         );
         listaPNLayout.setVerticalGroup(
             listaPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -372,13 +375,13 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "NO SE SELECCIONO NADA");
         }else{
                 id=Integer.parseInt((String)tbDatos.getValueAt(fila, 0).toString());
-                String dni=(String)tbDatos.getValueAt(fila, 1);
-                String nombre=(String)tbDatos.getValueAt(fila, 2);
-                String apellido=(String)tbDatos.getValueAt(fila, 3);
+                String producto=(String)tbDatos.getValueAt(fila, 1);
+                String precio=(String)tbDatos.getValueAt(fila, 2);
+                String stock=(String)tbDatos.getValueAt(fila, 3);
                 txtID.setText(""+id);
-                txtDNI.setText(""+dni);
-                txtNOMBRE.setText(""+nombre);
-                txtAPELLIDO.setText(""+apellido);
+                txtPRODUCTO.setText(""+producto);
+                txtPRECIO.setText(""+precio);
+                txtSTOCK.setText(""+stock);
         }
     }//GEN-LAST:event_tbDatosMouseClicked
 
@@ -418,10 +421,10 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Apellidolabel;
-    private javax.swing.JLabel DNIlabel;
     private javax.swing.JLabel IDlabel;
-    private javax.swing.JLabel NOMBRElabel;
+    private javax.swing.JLabel PrecioLabel;
+    private javax.swing.JLabel ProductoLabel;
+    private javax.swing.JLabel StockLabel;
     private javax.swing.JPanel botonesPN;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
@@ -430,10 +433,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel listaPN;
     private javax.swing.JTable tbDatos;
-    private javax.swing.JTextField txtAPELLIDO;
-    private javax.swing.JTextField txtDNI;
     private javax.swing.JTextField txtID;
-    private javax.swing.JTextField txtNOMBRE;
+    private javax.swing.JTextField txtPRECIO;
+    private javax.swing.JTextField txtPRODUCTO;
+    private javax.swing.JTextField txtSTOCK;
     // End of variables declaration//GEN-END:variables
 
     private void setLocationRelativeTo(Object object) {
