@@ -37,50 +37,55 @@ public class Principal extends javax.swing.JFrame {
      return retValue;
     
     }
-    //Lista
-    void Listar(){
-        String sql = "select * from productos";
-        try {
-            cn=con.getConnection();
-            st=cn.createStatement();
-            rs=st.executeQuery(sql);
-            Object[] productos = new Object[4];
-            modelo=(DefaultTableModel) tbDatos.getModel();
-            while (rs.next()){
-                productos[0]=rs.getInt("ID");
-                productos[1]=rs.getString("Producto");
-                productos[2]=rs.getString("Precio");
-                productos[3]=rs.getString("Stock");
-                modelo.addRow(productos);
-            }
-            tbDatos.setModel(modelo);
-            System.out.println(modelo);
-        } catch (SQLException e) {
-        }
-    }
-    //boton agregar
-    void Agregar(){
-        String producto = txtPRODUCTO.getText();
-        String precio = txtPRECIO.getText();
-        String stock = txtSTOCK.getText();
-        if (producto.equals("") || precio.equals("")){
-            JOptionPane.showMessageDialog(null, "Faltan datos por completar.");
-        }else{
-            String sql="insert into productos (Producto, Precio, Stock) values ('"+producto+"', '"+precio+"', '"+stock+"')";
-            try {
-                cn=con.getConnection();
-                st=cn.createStatement();
-                st.executeUpdate(sql);
-                JOptionPane.showMessageDialog(null, "Producto agregado correctamente.");
-                Barrer();
-                Limpiar();
-                Listar();
-            } catch (Exception e){
-            }
-        }
-    }
     
-    //para q no se duplique la tabla
+    void Agregar() {
+    String producto = txtPRODUCTO.getText();
+    String precio = txtPRECIO.getText();
+    String stock = txtSTOCK.getText();
+
+    if (producto.isEmpty() || precio.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Completar los datos que faltan.");
+    } else {
+        String sql = "insert into productos (Producto, Precio, Stock) values ('" + producto + "', '" + precio + "', '" + stock + "')";
+        try {
+            cn = con.getConnection();
+            st = cn.createStatement();
+            st.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "Producto agregado correctamente.");
+            Limpiar();
+            Listar(); // Actualiza la tabla después de agregar
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al agregar el producto: " + e.getMessage());
+        }
+    }
+}
+
+void Listar() {
+    // Limpia la tabla antes de cargar los datos
+    DefaultTableModel modelo = (DefaultTableModel) tbDatos.getModel();
+    modelo.setRowCount(0);
+
+    String sql = "select * from productos";
+    try {
+        cn = con.getConnection();
+        st = cn.createStatement();
+        rs = st.executeQuery(sql);
+
+        while (rs.next()) {
+            Object[] productos = {
+                rs.getInt("ID"),
+                rs.getString("Producto"),
+                rs.getString("Precio"),
+                rs.getString("Stock")
+            };
+            modelo.addRow(productos);
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al listar los productos: " + e.getMessage());
+    }
+}
+        
+ //para q no se duplique la tabla
     void Barrer() {
         //
         for (int i =0; i<=tbDatos.getRowCount(); i++){
@@ -88,6 +93,7 @@ public class Principal extends javax.swing.JFrame {
             i=i-1;
         }
     }
+   
     //limpiar los campos
     void Limpiar(){
         txtID.setText("");
@@ -242,6 +248,7 @@ public class Principal extends javax.swing.JFrame {
         txtID.setEditable(false);
         txtID.setBackground(new java.awt.Color(204, 204, 204));
         txtID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtID.setSelectionColor(new java.awt.Color(0, 0, 0));
 
         txtPRODUCTO.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
