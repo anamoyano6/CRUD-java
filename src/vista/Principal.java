@@ -26,7 +26,7 @@ public class Principal extends javax.swing.JFrame {
     
     public Principal() {
         initComponents();
-        
+        setResizable(false);//para q no se agrande
         setLocationRelativeTo(null); //para centrar
         Listar();
     }
@@ -74,6 +74,7 @@ public class Principal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Producto agregado correctamente.");
                 Barrer();
                 Limpiar();
+                Listar();
             } catch (Exception e){
             }
         }
@@ -166,11 +167,13 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sublime");
+        setBackground(new java.awt.Color(139, 22, 22));
         setIconImage(getIconImage());
 
-        botonesPN.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16), new java.awt.Color(153, 153, 153))); // NOI18N
+        botonesPN.setBackground(new java.awt.Color(255, 255, 255));
+        botonesPN.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnModificar.setBackground(new java.awt.Color(153, 153, 153));
+        btnModificar.setBackground(new java.awt.Color(204, 204, 204));
         btnModificar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -179,7 +182,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        btnEliminar.setBackground(new java.awt.Color(153, 153, 153));
+        btnEliminar.setBackground(new java.awt.Color(204, 204, 204));
         btnEliminar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -188,7 +191,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        btnAgregar.setBackground(new java.awt.Color(153, 153, 153));
+        btnAgregar.setBackground(new java.awt.Color(204, 204, 204));
         btnAgregar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -203,11 +206,11 @@ public class Principal extends javax.swing.JFrame {
             botonesPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, botonesPNLayout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                 .addGap(37, 37, 37))
         );
         botonesPNLayout.setVerticalGroup(
@@ -221,7 +224,8 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
-        datosPN.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "DATOS", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16), new java.awt.Color(153, 153, 153))); // NOI18N
+        datosPN.setBackground(new java.awt.Color(255, 255, 255));
+        datosPN.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         IDlabel.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         IDlabel.setText("ID");
@@ -250,45 +254,35 @@ public class Principal extends javax.swing.JFrame {
         datosPNLayout.setHorizontalGroup(
             datosPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(datosPNLayout.createSequentialGroup()
+                .addGap(47, 47, 47)
                 .addGroup(datosPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(datosPNLayout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addGroup(datosPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ProductoLabel)
-                            .addGroup(datosPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(StockLabel)
-                                .addGroup(datosPNLayout.createSequentialGroup()
-                                    .addComponent(IDlabel)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(7, 7, 7))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, datosPNLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(PrecioLabel)))
-                .addGroup(datosPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(datosPNLayout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addGroup(datosPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtSTOCK, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPRODUCTO, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(txtPRECIO, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(IDlabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ProductoLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(PrecioLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(StockLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(48, 48, 48)
+                .addGroup(datosPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtPRODUCTO, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                    .addComponent(txtID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPRECIO, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtSTOCK))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         datosPNLayout.setVerticalGroup(
             datosPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(datosPNLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(datosPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(61, 61, 61)
+                .addGroup(datosPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(IDlabel)
                     .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
+                .addGap(18, 18, 18)
                 .addGroup(datosPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ProductoLabel)
                     .addComponent(txtPRODUCTO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(datosPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPRECIO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PrecioLabel))
+                .addGap(14, 14, 14)
+                .addGroup(datosPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PrecioLabel)
+                    .addComponent(txtPRECIO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(datosPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSTOCK, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -296,8 +290,12 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(55, Short.MAX_VALUE))
         );
 
-        listaPN.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "LISTA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16), new java.awt.Color(153, 153, 153))); // NOI18N
+        listaPN.setBackground(new java.awt.Color(255, 255, 255));
+        listaPN.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        tbDatos.setBackground(new java.awt.Color(255, 255, 255));
+        tbDatos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tbDatos.setForeground(new java.awt.Color(0, 0, 0));
         tbDatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -306,6 +304,8 @@ public class Principal extends javax.swing.JFrame {
                 "ID", "PRODUCTO", "PRECIO", "STOCK"
             }
         ));
+        tbDatos.setSelectionBackground(new java.awt.Color(153, 0, 0));
+        tbDatos.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tbDatos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbDatosMouseClicked(evt);
@@ -323,7 +323,7 @@ public class Principal extends javax.swing.JFrame {
         listaPN.setLayout(listaPNLayout);
         listaPNLayout.setHorizontalGroup(
             listaPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
         );
         listaPNLayout.setVerticalGroup(
             listaPNLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
