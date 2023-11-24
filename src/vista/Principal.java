@@ -6,6 +6,8 @@
 package vista;
 
 import config.Conexion;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,8 +26,16 @@ public class Principal extends javax.swing.JFrame {
     
     public Principal() {
         initComponents();
+        
         setLocationRelativeTo(null); //para centrar
         Listar();
+    }
+    //Icono JFrame
+    @Override
+    public Image getIconImage() {
+     Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Imagen/logo2.png"));
+     return retValue;
+    
     }
     //Lista
     void Listar(){
@@ -155,6 +165,8 @@ public class Principal extends javax.swing.JFrame {
         tbDatos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Sublime");
+        setIconImage(getIconImage());
 
         botonesPN.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 16), new java.awt.Color(153, 153, 153))); // NOI18N
 
