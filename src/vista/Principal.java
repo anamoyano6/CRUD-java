@@ -57,11 +57,12 @@ public class Principal extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al agregar el producto: " + e.getMessage());
         }
+        
     }
 }
 
 void Listar() {
-    // Limpia la tabla antes de cargar los datos
+    // Limpia la tabla antes d cargar los datos
     DefaultTableModel modelo = (DefaultTableModel) tbDatos.getModel();
     modelo.setRowCount(0);
 
@@ -87,13 +88,11 @@ void Listar() {
         
  //para q no se duplique la tabla
     void Barrer() {
-        //
-        for (int i =0; i<=tbDatos.getRowCount(); i++){
-            modelo.removeRow(i);
-            i=i-1;
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
         }
     }
-   
+
     //limpiar los campos
     void Limpiar(){
         txtID.setText("");
