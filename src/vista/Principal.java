@@ -52,7 +52,7 @@ public class Principal extends javax.swing.JFrame {
             st = cn.createStatement();
             st.executeUpdate(sql);
             JOptionPane.showMessageDialog(null, "Producto agregado correctamente.");
-            Limpiar();
+            BorrarCampos();
             Listar(); // Actualiza la tabla después de agregar
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al agregar el producto: " + e.getMessage());
@@ -87,14 +87,14 @@ void Listar() {
 }
         
  //para q no se duplique la tabla
-    void Barrer() {
+    void LimpiarTabla() {
         while (modelo.getRowCount() > 0) {
             modelo.removeRow(0);
         }
     }
 
     //limpiar los campos
-    void Limpiar(){
+    void BorrarCampos(){
         txtID.setText("");
         txtPRODUCTO.setText("");
         txtPRECIO.setText("");
@@ -116,8 +116,8 @@ void Listar() {
                 st=cn.createStatement();
                 st.executeUpdate(sql);
                        JOptionPane.showMessageDialog(null, "El producto se actualizo correctamente.");
-                Barrer(); 
-                Limpiar();
+                LimpiarTabla(); 
+                BorrarCampos();
                 Listar();
             } catch (Exception e) {
             }
@@ -135,8 +135,8 @@ void Listar() {
                 st=cn.createStatement();
                 st.executeUpdate(sql);
                 JOptionPane.showMessageDialog(null, "El producto se elimino correctamente.");
-                Barrer();
-                Limpiar();
+                LimpiarTabla();
+                BorrarCampos();
                 Listar();
             } catch (Exception e){
             }
@@ -371,26 +371,26 @@ void Listar() {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         Modificar();
         Listar();
-        Limpiar();
+        BorrarCampos();
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         Eliminar();
         Listar();
-        Limpiar();
+        BorrarCampos();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
          Agregar();
          Listar();
-         Limpiar();
+         BorrarCampos();
     
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void tbDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDatosMouseClicked
         int fila=tbDatos.getSelectedRow();
         if(fila==-1){
-            JOptionPane.showMessageDialog(null, "NO SE SELECCIONO NADA");
+            JOptionPane.showMessageDialog(null, "Seleccione un producto.");
         }else{
                 id=Integer.parseInt((String)tbDatos.getValueAt(fila, 0).toString());
                 String producto=(String)tbDatos.getValueAt(fila, 1);
